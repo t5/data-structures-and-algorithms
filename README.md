@@ -1,2 +1,5 @@
 # data-structures-and-algorithms
-My implementations of data structures and algorithms in Python
+Implementations of data structures and algorithms in Python 3
+
+## Resources
+- The Algorithm Design Manual (Skiena)
