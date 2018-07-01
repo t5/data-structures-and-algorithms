@@ -1,14 +1,23 @@
 """Implements the quicksort algorithm"""
-
 import random
 
-def partition(unsorted):
-    """Returns the partition index"""
+def quicksort(unsorted):
+    """Returns the sorted list
 
-    ind = random.randint(0, len(unsorted)-1)
-    p_elem = unsorted.pop(ind)
+    Average case for time complexity: O(nlog(n))
+    Space complexity: O(n)
+    """
+    
+    if len(unsorted) == 1:
+        return unsorted
+    if not unsorted:
+        return []
+
     lower = []
     upper = []
+
+    p_index = random.randint(0, len(unsorted)-1)
+    p_elem = unsorted.pop(p_index)
 
     for item in unsorted:
         if item < p_elem:
@@ -16,22 +25,7 @@ def partition(unsorted):
         else:
             upper.append(item)
 
-    p_index = len(lower)
-    unsorted[:] = lower + [p_elem] + upper
-    return p_index
+    return quicksort(lower) + [p_elem] + quicksort(upper)
 
-def quicksort(unsorted):
-    """Returns the sorted list"""
-
-    if not unsorted:
-        return []
-    if len(unsorted) == 1:
-        return unsorted
-
-    p_index = partition(unsorted)
-    unsorted[:p_index] = quicksort(unsorted[:p_index])
-    unsorted[p_index:] = quicksort(unsorted[p_index:])
-    return unsorted
-
-TEST = [100, 60, 2, 18, 1, 6, 8, 3]
+TEST = [1, 100, 60, 2, 18, 1, 6, 8, 3]
 print(quicksort(TEST))
